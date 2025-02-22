@@ -39,15 +39,40 @@ exports.createBook = async (req, res) => {
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await prisma.book.findMany({
-      include: {
-        category: { select: { cat_name: true } },
-        collection: { select: { collection_name: true } },
-      },
-    });
+    const books = await prisma.book.findMany({});
 
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: "Error fetching books" });
+  }
+};
+
+exports.updateBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
+
+    const existingBook = await prisma.book.findUnique({
+      where: { book_id: parseInt(id) },
+    });
+
+    if (!existingBook) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    const updatedBook = await prisma.book.update({
+      where: { book_id: parseInt(id) },
+      data: {
+        book_name,
+        book_cat_id,
+        book_collection_id,
+        book_launch_date: new Date(book_launch_date),
+        book_publisher,
+      },
+    });
+
+    res.json({ message: "Book updated successfully", updatedBook });
+  } catch (error) {
+    res.status(500).json({ error: "Error updating book", details: error.message });
   }
 };
