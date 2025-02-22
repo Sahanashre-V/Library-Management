@@ -11,6 +11,7 @@ const membership = require("../Controllers/memership")
 // Book Routes
 router.get("/books", bookController.getAllBooks);
 router.post("/books", bookController.createBook);
+router.put("/books/:id",bookController.updateBook)
 
 // Category Routes
 router.get("/categories", categoryController.getCategories);
@@ -21,10 +22,10 @@ router.get("/collections", collectionController.getAllCollections);
 router.post("/collections", collectionController.createCollection);
 
 // Issuance Routes
-router.get("/issuance", issuanceController.getAllIssuedBooks);
-router.post("/issuance", issuanceController.issueBook);
-router.put("/issuance/:id", issuanceController.updateIssuance);
-router.delete("/issuance/:id", issuanceController.deleteIssuance);
+router.get("/issuances", issuanceController.getAllIssuedBooks);
+router.post("/issuances", issuanceController.issueBook);
+router.put("/issuances/:id", issuanceController.updateIssuance);
+router.delete("/issuances/:id", issuanceController.deleteIssuance);
 
 // Member Routes
 router.get("/members", memberController.getAllMembers);
@@ -33,10 +34,10 @@ router.put("/members/:id", memberController.updateMember);
 router.delete("/members/:id", memberController.deleteMember);
 
 // Memership Routes
-router.get("/membership", membership.getAllMemberships);
-router.post("/membership", membership.createMembership);
-router.put("/membership/:id", membership.updateMembership);
-router.delete("/membership/:id", membership.deleteMembership);
+router.get("/memberships", membership.getAllMemberships);
+router.post("/memberships", membership.createMembership);
+router.put("/memberships/:id", membership.updateMembership);
+router.delete("/memberships/:id", membership.deleteMembership);
 
 
 module.exports = router;

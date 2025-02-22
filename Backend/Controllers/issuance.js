@@ -12,7 +12,7 @@ exports.getAllIssuedBooks = async (req, res) => {
 
 exports.issueBook = async (req, res) => {
     try {
-        const { book_id, issuance_date, issuance_member, issued_by, target_return_date, issuance_status } = req.body;
+        const { book_id, issuance_date, issuance_member_id, issued_by, target_return_date, issuance_status } = req.body;
 
         const existingBook = await prisma.book.findUnique({
             where: { book_id },
@@ -23,7 +23,7 @@ exports.issueBook = async (req, res) => {
         }
 
         const existingMember = await prisma.member.findUnique({
-            where: { mem_id: issuance_member },
+            where: { mem_id: issuance_member_id },
         });
 
         if (!existingMember) {
@@ -37,7 +37,7 @@ exports.issueBook = async (req, res) => {
                 target_return_date: new Date(target_return_date),
                 issuance_status,
                 book: { connect: { book_id } },  
-                issuance_member: { connect: { mem_id: issuance_member } }, 
+                issuance_member: { connect: { mem_id: issuance_member_id } }, 
             }
         });
 
