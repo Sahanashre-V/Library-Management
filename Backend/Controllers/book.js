@@ -3,12 +3,13 @@ const prisma = new PrismaClient();
 
 exports.createBook = async (req, res) => {
   try {
-    const { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
+    let { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
+    book_cat_id = Number(book_cat_id);
+    book_collection_id = Number(book_collection_id);
 
     const categoryExists = await prisma.category.findUnique({
       where: { cat_id: book_cat_id },
     });
-
     if (!categoryExists) {
       return res.status(400).json({ error: "Invalid category ID" });
     }
@@ -16,7 +17,6 @@ exports.createBook = async (req, res) => {
     const collectionExists = await prisma.collection.findUnique({
       where: { collection_id: book_collection_id },
     });
-
     if (!collectionExists) {
       return res.status(400).json({ error: "Invalid collection ID" });
     }
@@ -37,6 +37,7 @@ exports.createBook = async (req, res) => {
   }
 };
 
+
 exports.getAllBooks = async (req, res) => {
   try {
     const books = await prisma.book.findMany({});
@@ -50,8 +51,8 @@ exports.getAllBooks = async (req, res) => {
 exports.updateBook = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(req.body)
     const { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
-
     const existingBook = await prisma.book.findUnique({
       where: { book_id: parseInt(id) },
     });
@@ -64,7 +65,7 @@ exports.updateBook = async (req, res) => {
       where: { book_id: parseInt(id) },
       data: {
         book_name,
-        book_cat_id,
+        book_cat_id: parseInt(book_cat_id),
         book_collection_id,
         book_launch_date: new Date(book_launch_date),
         book_publisher,

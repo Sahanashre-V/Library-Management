@@ -12,7 +12,11 @@ exports.getAllIssuedBooks = async (req, res) => {
 
 exports.issueBook = async (req, res) => {
     try {
-        const { book_id, issuance_date, issuance_member_id, issued_by, target_return_date, issuance_status } = req.body;
+        let { book_id, issuance_date, issuance_member_id, issued_by, target_return_date, issuance_status } = req.body;
+        
+        // Convert to numbers
+        book_id = parseInt(book_id, 10);
+        issuance_member_id = parseInt(issuance_member_id, 10);
 
         const existingBook = await prisma.book.findUnique({
             where: { book_id },
@@ -36,13 +40,14 @@ exports.issueBook = async (req, res) => {
                 issued_by,
                 target_return_date: new Date(target_return_date),
                 issuance_status,
-                book: { connect: { book_id } },  
-                issuance_member: { connect: { mem_id: issuance_member_id } }, 
+                book: { connect: { book_id } },
+                issuance_member: { connect: { mem_id: issuance_member_id } },
             }
         });
 
         res.status(201).json(newIssuance);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: error.message });
     }
 };
