@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET;
+const jwt = require("jsonwebtoken")
 
 exports.getAllMembers = async function (req, res) {
     const members = await prisma.member.findMany();
@@ -9,12 +11,21 @@ exports.getAllMembers = async function (req, res) {
 exports.createMember = async function (req, res) {
     const { mem_name, mem_phone, mem_email } = req.body;
     const member = await prisma.member.create({ data: { mem_name, mem_phone, mem_email } });
-    res.json(member);
+    // JWT Token
+const token = jwt.sign(
+    { id: member.mem_id, email: member.mem_email },
+    JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+  
+  res.json({ member, token });
 };
+
 
 exports.updateMember = async function (req, res) {
     const { id } = req.params;
-    const updatedMember = await prisma.member.update({ where: { mem_id: Number(id) }, data: req.body });
+    const { mem_name, mem_phone, mem_email } = req.body;
+    const updatedMember = await prisma.member.update({ where: { mem_id: Number(id) }, data: {mem_name, mem_phone, mem_email}});
     res.json(updatedMember);
 };
 

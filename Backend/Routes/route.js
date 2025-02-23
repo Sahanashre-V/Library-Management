@@ -1,43 +1,67 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
+// Import Controllers
 const bookController = require("../Controllers/book");
 const categoryController = require("../Controllers/category");
 const collectionController = require("../Controllers/collection");
 const issuanceController = require("../Controllers/issuance");
 const memberController = require("../Controllers/member");
-const membership = require("../Controllers/memership")
+const membershipController = require("../Controllers/memership");
+const loginController = require("../Controllers/login");
 
-// Book Routes
-router.get("/books", bookController.getAllBooks);
-router.post("/books", bookController.createBook);
-router.put("/books/:id",bookController.updateBook)
+// Authentication Middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
 
-// Category Routes
-router.get("/categories", categoryController.getCategories);
-router.post("/categories", categoryController.createCategory);
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized: Token required" });
+  }
 
-// Collection Routes
-router.get("/collections", collectionController.getAllCollections);
-router.post("/collections", collectionController.createCollection);
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err.status==403) {
+      return res.status(403).json({ error: "Forbidden: Invalid token" });
+    }
+    req.user = user;
+    next();
+  });
+};
 
-// Issuance Routes
-router.get("/issuances", issuanceController.getAllIssuedBooks);
-router.post("/issuances", issuanceController.issueBook);
-router.put("/issuances/:id", issuanceController.updateIssuance);
-router.delete("/issuances/:id", issuanceController.deleteIssuance);
+// Login Route
+router.post("/login", loginController.login);
 
 // Member Routes
-router.get("/members", memberController.getAllMembers);
-router.post("/members", memberController.createMember);
-router.put("/members/:id", memberController.updateMember);
-router.delete("/members/:id", memberController.deleteMember);
+router.post("/members", memberController.createMember);  //Creating member(Signup)
+router.get("/members", authenticateToken, memberController.getAllMembers);
+router.put("/members/:id", authenticateToken, memberController.updateMember);
+router.delete("/members/:id", authenticateToken, memberController.deleteMember);
 
-// Memership Routes
-router.get("/memberships", membership.getAllMemberships);
-router.post("/memberships", membership.createMembership);
-router.put("/memberships/:id", membership.updateMembership);
-router.delete("/memberships/:id", membership.deleteMembership);
+// Book Routes
+router.get("/books", authenticateToken, bookController.getAllBooks);
+router.post("/books", authenticateToken, bookController.createBook);
+router.put("/books/:id", authenticateToken, bookController.updateBook);
 
+// Category Routes
+router.get("/categories", authenticateToken, categoryController.getCategories);
+router.post("/categories", authenticateToken, categoryController.createCategory);
+
+// Collection Routes
+router.get("/collections", authenticateToken, collectionController.getAllCollections);
+router.post("/collections", authenticateToken, collectionController.createCollection);
+
+// Issuance Routes
+router.get("/issuances", authenticateToken, issuanceController.getAllIssuedBooks);
+router.post("/issuances", authenticateToken, issuanceController.issueBook);
+router.put("/issuances/:id", authenticateToken, issuanceController.updateIssuance);
+router.delete("/issuances/:id", authenticateToken, issuanceController.deleteIssuance);
+
+// Membership Routes
+router.get("/memberships", authenticateToken, membershipController.getAllMemberships);
+router.post("/memberships", authenticateToken, membershipController.createMembership);
+router.put("/memberships/:id", authenticateToken, membershipController.updateMembership);
+router.delete("/memberships/:id", authenticateToken, membershipController.deleteMembership);
 
 module.exports = router;
