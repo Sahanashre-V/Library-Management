@@ -15,6 +15,7 @@ function Navbar() {
         </Link>
         <Link to="/book" className="cursor-pointer text-white">Books</Link>
         <Link to="/issuance" className="cursor-pointer text-white">Issuance</Link>
+        <Link to="/task2" className="cursor-pointer text-white">Task 2</Link>
       </div>
     </nav>
   );
