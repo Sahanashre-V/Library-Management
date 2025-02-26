@@ -44,3 +44,5 @@
 [2025-02-26 13:31:27] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
 [2025-02-26 13:31:27] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
 [2025-02-26 13:47:29] [INFO] [ServerStart] - Server running on port 7070
+[2025-02-26 16:16:48] [INFO] [ServerStart] - Server running on port 7070
+[2025-02-26 16:17:28] [INFO] [RequestMiddleware] - Incoming Request: POST /api/members

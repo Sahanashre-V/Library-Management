@@ -19,17 +19,18 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/mydatabase
+      - DATABASE_URL=postgresql://admin:admin123@db:5432/mydatabase
     networks:
       - app_network
+    command: [ "sh", "-c", "npx prisma migrate deploy && node server.js" ]
 
   db:
     image: postgres
     container_name: database
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
       POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"  
