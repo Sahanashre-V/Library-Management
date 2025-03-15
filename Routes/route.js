@@ -1,16 +1,19 @@
-const express = require("express");
-const router = express.Router();
-const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+import express from "express";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-// Import Controllers
-const bookController = require("../Controllers/book");
-const categoryController = require("../Controllers/category");
-const collectionController = require("../Controllers/collection");
-const issuanceController = require("../Controllers/issuance");
-const memberController = require("../Controllers/member");
-const membershipController = require("../Controllers/memership");
-const loginController = require("../Controllers/login");
+// import {bookController} from "../Controllers/book.js";
+import {categoryController} from "../Controllers/category.js";
+import {collectionController} from "../Controllers/collection.js";
+import {issuanceController} from "../Controllers/issuance.js";
+import {memberController} from "../Controllers/member.js";
+import {membershipController} from "../Controllers/memership.js";
+import {loginController} from "../Controllers/login.js";
+
+dotenv.config();
+
+const router = express.Router();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Authentication Middleware
 const authenticateToken = (req, res, next) => {
@@ -22,12 +25,12 @@ const authenticateToken = (req, res, next) => {
   }
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
-    if ( err && err.status==403 ) {
+    if (err && err.status === 403) {
       return res.status(403).json({ error: "Forbidden: Invalid token" });
     }
-    console.log(JWT_SECRET,"JWT SECRET")
-    console.log(token,"TOKEN")
-    console.log(err,"error")
+    console.log(JWT_SECRET, "JWT SECRET");
+    console.log(token, "TOKEN");
+    console.log(err, "error");
     req.user = user;
     next();
   });
@@ -37,7 +40,7 @@ const authenticateToken = (req, res, next) => {
 router.post("/login", loginController.login);
 
 // Member Routes
-router.post("/members", memberController.createMember);  //Creating member(Signup)
+router.post("/members", memberController.createMember); // Creating member (Signup)
 router.get("/members", authenticateToken, memberController.getAllMembers);
 router.put("/members/:id", authenticateToken, memberController.updateMember);
 router.delete("/members/:id", authenticateToken, memberController.deleteMember);
@@ -67,4 +70,4 @@ router.post("/memberships", authenticateToken, membershipController.createMember
 router.put("/memberships/:id", authenticateToken, membershipController.updateMembership);
 router.delete("/memberships/:id", authenticateToken, membershipController.deleteMembership);
 
-module.exports = router;
+export default router;

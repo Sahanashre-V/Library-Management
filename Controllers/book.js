@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-exports.createBook = async (req, res) => {
+export const createBook = async (req, res) => {
   try {
     let { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
     book_cat_id = Number(book_cat_id);
@@ -38,7 +38,7 @@ exports.createBook = async (req, res) => {
 };
 
 
-exports.getAllBooks = async (req, res) => {
+export const getAllBooks = async (req, res) => {
   try {
     const books = await prisma.book.findMany({});
 
@@ -48,7 +48,7 @@ exports.getAllBooks = async (req, res) => {
   }
 };
 
-exports.updateBook = async (req, res) => {
+export const updateBook = async (req, res) => {
   try {
     const { id } = req.params;
     console.log(req.body)

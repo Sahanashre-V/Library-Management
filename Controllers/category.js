@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-exports.createCategory = async (req, res) => {
+export const createCategory = async (req, res) => {
   try {
     const { cat_name } = req.body;
     const category = await prisma.category.create({
@@ -13,7 +13,7 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-exports.getCategories = async (req, res) => {
+export const getCategories = async (req, res) => {
   try {
     const categories = await prisma.category.findMany();
     res.json(categories);

@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-exports.getAllMemberships = async (req, res) => {
+export const getAllMemberships = async (req, res) => {
     try {
         const memberships = await prisma.membership.findMany();
         res.json(memberships);
@@ -10,7 +10,7 @@ exports.getAllMemberships = async (req, res) => {
     }
 };
 
-exports.createMembership = async (req, res) => {
+export const createMembership = async (req, res) => {
     try {
         const { member_id, status } = req.body;
         const existingMember = await prisma.member.findUnique({
@@ -31,7 +31,7 @@ exports.createMembership = async (req, res) => {
     }
 };
 
-exports.updateMembership = async (req, res) => {
+export const updateMembership = async (req, res) => {
     try {
         const { id } = req.params;
         const updatedMembership = await prisma.membership.update({
@@ -45,7 +45,7 @@ exports.updateMembership = async (req, res) => {
     }
 };
 
-exports.deleteMembership = async (req, res) => {
+export const deleteMembership = async (req, res) => {
     try {
         const { id } = req.params;
         await prisma.membership.delete({

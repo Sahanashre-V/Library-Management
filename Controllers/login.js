@@ -1,9 +1,10 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import jwt from "jsonwebtoken"
 const JWT_SECRET = process.env.JWT_SECRET;
-const jwt = require("jsonwebtoken")
 
-exports.login = async function (req, res) {
+
+export const login = async function (req, res) {
   try {
     const { mem_name, mem_email } = req.body;
     

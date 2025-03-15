@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-exports.getAllIssuedBooks = async (req, res) => {
+export const getAllIssuedBooks = async (req, res) => {
     try {
         const issuedBooks = await prisma.issuance.findMany();
         res.json(issuedBooks);
@@ -10,7 +10,7 @@ exports.getAllIssuedBooks = async (req, res) => {
     }
 };
 
-exports.issueBook = async (req, res) => {
+export const issueBook = async (req, res) => {
     try {
         let { book_id, issuance_date, issuance_member_id, issued_by, target_return_date, issuance_status } = req.body;
         
@@ -52,7 +52,7 @@ exports.issueBook = async (req, res) => {
     }
 };
 
-exports.updateIssuance = async (req, res) => {
+export const updateIssuance = async (req, res) => {
     try {
         const { id } = req.params;
         const updatedIssuance = await prisma.issuance.update({
@@ -66,7 +66,7 @@ exports.updateIssuance = async (req, res) => {
     }
 };
 
-exports.deleteIssuance = async (req, res) => {
+export const deleteIssuance = async (req, res) => {
     try {
         const { id } = req.params;
         await prisma.issuance.delete({

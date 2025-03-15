@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-exports.createCollection = async (req, res) => {
+export const createCollection = async (req, res) => {
   try {
     const { collection_name } = req.body;
 
@@ -15,7 +15,7 @@ exports.createCollection = async (req, res) => {
   }
 };
 
-exports.getAllCollections = async (req, res) => {
+export const getAllCollections = async (req, res) => {
   try {
     const collections = await prisma.collection.findMany();
     res.json(collections);
