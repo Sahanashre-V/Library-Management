@@ -22,9 +22,12 @@ const authenticateToken = (req, res, next) => {
   }
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err.status==403) {
+    if ( err && err.status==403 ) {
       return res.status(403).json({ error: "Forbidden: Invalid token" });
     }
+    console.log(JWT_SECRET,"JWT SECRET")
+    console.log(token,"TOKEN")
+    console.log(err,"error")
     req.user = user;
     next();
   });

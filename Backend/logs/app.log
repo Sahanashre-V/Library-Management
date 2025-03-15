@@ -46,3 +46,20 @@
 [2025-02-26 13:47:29] [INFO] [ServerStart] - Server running on port 7070
 [2025-02-26 16:16:48] [INFO] [ServerStart] - Server running on port 7070
 [2025-02-26 16:17:28] [INFO] [RequestMiddleware] - Incoming Request: POST /api/members
+[2025-02-26 17:24:34] [INFO] [ServerStart] - Server running on port 7070
+[2025-02-26 17:24:40] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:24:42] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:24:46] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:24:48] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:25:03] [INFO] [RequestMiddleware] - Incoming Request: GET /api/issuances
+[2025-02-26 17:25:05] [INFO] [RequestMiddleware] - Incoming Request: GET /api/issuances
+[2025-02-26 17:25:35] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:25:37] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-02-26 17:26:16] [INFO] [RequestMiddleware] - Incoming Request: POST /api/members
+[2025-02-27 11:29:24] [INFO] [ServerStart] - Server running on port 7070
+[2025-02-27 11:31:38] [INFO] [ServerStart] - Server running on port 7070
+[2025-03-15 13:22:13] [INFO] [ServerStart] - Server running on port 7070
+[2025-03-15 13:22:44] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-03-15 13:22:49] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-03-15 13:23:09] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
+[2025-03-15 13:23:14] [INFO] [RequestMiddleware] - Incoming Request: GET /api/books
