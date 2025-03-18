@@ -8,7 +8,6 @@ async function main() {
     ]
   });
 
-  console.log("Issuance data has been seeded successfully!");
 }
 
 main()

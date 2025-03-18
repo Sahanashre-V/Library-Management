@@ -11,14 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Get __dirname equivalent in ES Modules
-// const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-app.use((req, res, next) => {
-  logger.info(`Incoming Request: ${req.method} ${req.originalUrl}`, { functionName: 'RequestMiddleware' });
-  next();
-});
+const __dirname = path.resolve();
+
+
 
 app.use("/api", router);
 
@@ -32,5 +28,5 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`, { functionName: 'ServerStart' });
+  console.log(`Server running on port ${PORT}`);
 });
