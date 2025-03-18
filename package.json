@@ -6,7 +6,7 @@
     "scripts": {
       "start": "node server.js",
       "server": "nodemon server.js",
-      "build": "npm install && npm install --only=dev && npm install --prefix Frontend && npm run build --prefix Frontend && prisma generate && prisma migrate deploy",
+      "build": "npm install && npm install --prefix Frontend &&  npm run build --prefix Frontend && prisma generate && prisma migrate deploy",
       "migrate": "prisma migrate deploy",
       "prisma:generate": "prisma generate"
     },
