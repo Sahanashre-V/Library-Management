@@ -51,7 +51,7 @@ exports.getAllBooks = async (req, res) => {
 exports.updateBook = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.body)
+    // console.log(req.body)
     const { book_name, book_cat_id, book_collection_id, book_launch_date, book_publisher } = req.body;
     const existingBook = await prisma.book.findUnique({
       where: { book_id: parseInt(id) },
