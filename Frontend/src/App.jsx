@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Components/Navbar';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Books from './Components/Book';
 import Issuance from './Components/Issuance';
+import HomePage from './Components/Homepage';
 // import Task2 from './Components/Task2';
 // import NeverBorrowed from './Components/NeverBorrowed';
 // import OutstandingBooks from './Components/OutstandingBooks';
@@ -13,8 +13,8 @@ import Issuance from './Components/Issuance';
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
+        <Route path='/' element={<HomePage/>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
