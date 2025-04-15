@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaBook, FaUserCircle, FaUserShield, FaExchangeAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -5,29 +6,10 @@ import { FaBook, FaUserCircle, FaUserShield, FaExchangeAlt, FaFacebookF, FaTwitt
 const HomePage = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col">
-      {/* Navigation Bar - Updated color to match hero section */}
-      <nav className="bg-gradient-to-r from-blue-700 to-indigo-800 p-4 flex justify-between items-center sticky top-0 z-10">
-        <div>
-          <Link to="/" className="flex items-center cursor-pointer text-white font-bold text-xl">
-            <FaBook className="text-white text-2xl mr-2" />
-            Readora
-          </Link>
-        </div>
-        <div className="flex space-x-4 items-center">
-          <Link to="/signup" className="cursor-pointer text-white">Signup</Link>
-          <Link to="/login" className="cursor-pointer text-white">Login</Link>
-          <Link to="/profile">
-            <FaUserCircle className="cursor-pointer text-white text-2xl" />
-          </Link>
-          <Link to="/book" className="cursor-pointer text-white">Books</Link>
-          <Link to="/issuance" className="cursor-pointer text-white">Issuance</Link>
-        </div>
-      </nav>
-
       {/* Main Content with added space */}
       <main className="flex-grow">
         {/* Added space between navbar and hero section */}
-        <div className="h-6"></div>
+        <div className="h-1"></div>
         
         {/* Hero Section */}
         <section className="relative bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-24 px-6">

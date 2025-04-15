@@ -5,6 +5,7 @@ import Profile from './Components/Profile';
 import Books from './Components/Book';
 import Issuance from './Components/Issuance';
 import HomePage from './Components/Homepage';
+import Navbar from './Components/Navbar';
 // import Task2 from './Components/Task2';
 // import NeverBorrowed from './Components/NeverBorrowed';
 // import OutstandingBooks from './Components/OutstandingBooks';
@@ -13,6 +14,7 @@ import HomePage from './Components/Homepage';
 function App() {
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path="/signup" element={<Signup />} />
